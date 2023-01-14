@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import happy from "./images/happy.png";
-import sad from "./images/sad.png";
+import "./styles.css";
 
 const initialTime = new Date();
 
@@ -12,7 +11,6 @@ function Tamagotchi() {
   const [isAlive, setIsAlive] = useState(true);
   const [notification, setNotification] = useState("");
   const [score, setScore] = useState(0);
-  const [image, setImage] = useState(happy);
   const [time, setTime] = useState(initialTime);
 
   useEffect(() => {
@@ -47,29 +45,33 @@ function Tamagotchi() {
   }
 
   function decreaseValues() {
-    if (hunger > 0 && happiness > 0) {
+    if (hunger > 0 && happiness > 0 && health > 0) {
       setHunger(hunger - 10);
       setHappiness(happiness - 10);
+      setHealth(health - 10);
     } else {
       setIsAlive(false);
     }
   }
-
   useEffect(() => {
     const intervalId = setInterval(decreaseValues, 10000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [hunger, happiness, health]);
 
   if (!isAlive) {
-    return <div>Your Tamagotchi is dead.</div>;
+    return <div>Tu tamagochi ha muerto.</div>;
   }
 
   return (
     <div>
-      <div>Hunger: {hunger}</div>
-      <div>Happiness: {happiness}</div>
-      <button onClick={feed}>Feed</button>
-      <button onClick={play}>Play</button>
+      <div>Hambre: {hunger}</div>
+      <div>Felicidad: {happiness}</div>
+      <div>Salud: {health}</div>
+      <button onClick={feed}>Alimentar</button>
+      <button onClick={play}>Jugar</button>
+      <button onClick={cure}>Cura</button>
+      <div>{notification}</div>
+      <div>Puntuacion: {score}</div>
     </div>
   );
 }
