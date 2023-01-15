@@ -1,6 +1,6 @@
 import React from "react";
 import Tamagotchi from "./componentes/Tamagochi";
-import "./componentes/styles.css";
+import "./styles.css";
 
 function App() {
   return (

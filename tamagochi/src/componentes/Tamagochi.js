@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import "./styles.css";
 
 const initialTime = new Date();
 
